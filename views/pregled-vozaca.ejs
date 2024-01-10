@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregled vozača</title>
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+<body>
+<h1><%= title %></h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Šifra vozača</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Datum isteka licence</th>
+        <th>Datum isteka dozvole</th>
+        <th>Aktivnost</th>
+    </tr>
+    </thead>
+    <tbody id="vozaciTableBody">
+    <% for(let i = 0; i < vozaci.length; i++){%>
+    <tr>
+        <td> <%= vozaci[i].sifra_vozaca%></td>
+        <td><%= vozaci[i].ime%></td>
+        <td><%= vozaci[i].prezime%></td>
+        <td><%= vozaci[i].datum_isteka_licence%></td>
+        <td><%= vozaci[i].datum_isteka_dozvole%></td>
+        <td><%= vozaci[i].aktivnost%></td>
+        <% } %>
+    </tr>
+    </tbody>
+</table>
+
+<form method="POST" action="/pregled-vozaca/dodaj-vozaca">
+    <label for="ime">Ime:</label>
+    <input type="text" id="ime" name="ime" required>
+
+    <label for="prezime">Prezime:</label>
+    <input type="text" id="prezime" name="prezime" required>
+
+    <label for="datum_isteka_licence">Datum isteka licence:</label>
+    <input type="date" id="datum_isteka_licence" name="datum_isteka_licence" required>
+
+    <label for="datum_isteka_dozvole">Datum isteka dozvole:</label>
+    <input type="date" id="datum_isteka_dozvole" name="datum_isteka_dozvole" required>
+
+    <label for="aktivnost">Aktivnost:</label>
+    <select id="aktivnost" name="aktivnost" required>
+        <option value="aktivan">Aktivan</option>
+        <option value="neaktivan">Neaktivan</option>
+    </select>
+
+    <button type="submit">Dodaj vozača</button>
+</form>
+<form id="deleteForm" action="/pregled-vozaca/obrisi-vozaca" method="POST">
+    <label for="sifra_vozaca">Šifra vozača:</label>
+    <input type="number" id="sifra_vozaca" name="sifra_vozaca" required>
+    <button type="button" onclick="deleteDriver()">Obriši vozača</button>
+</form>
+
+<script>
+    function deleteDriver() {
+        const sifraVozaca = document.getElementById('sifra_vozaca').value;
+
+        fetch(`/pregled-vozaca/obrisi-vozaca/${sifraVozaca}`, {
+            method: 'DELETE', // Use DELETE method
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            })
+            .then(() => {
+                console.log('Success: Driver deleted');
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+
+</body>
+</html>
+

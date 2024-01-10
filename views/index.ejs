@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Putni nalog 2</title>
+</head>
+<body>
+<h1>Unos parametara</h1>
+
+<form action="/parametri" method="POST">
+  <label for="startDate">Period 1: početni datum:</label>
+  <input type="date" id="startDate" name="startDate" required>
+
+  <label for="endDate">Završni datum:</label>
+  <input type="date" id="endDate" name="endDate" required>
+
+  <br>
+
+  <label for="startDate2">Period 2: početni datum:</label>
+  <input type="date" id="startDate2" name="startDate2" required>
+
+  <label for="endDate2">Završni datum (drugi period):</label>
+  <input type="date" id="endDate2" name="endDate2" required>
+
+  <br>
+
+  <button type="submit">Generiši izvještaj</button>
+
+</form>
+<a href="/pregled-vozaca">
+  <button>Pregled vozača</button>
+</a>
+<a href="/putni-nalog">
+  <button>Putni Nalog</button>
+</a>
+</body>
+</html>

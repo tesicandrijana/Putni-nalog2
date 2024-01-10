@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalji putnog naloga</title>
+</head>
+<body>
+<h1>Detalji putnog naloga</h1>
+
+<form action="/putni-nalog" method="post">
+    <label for="sifreNaloga">Odaberi šifru naloga:</label>
+    <select id="sifreNaloga" name="sifreNaloga">
+        <% sifreNaloga.forEach(sifreNaloga => { %>
+            <option value="<%= sifreNaloga.sifra_naloga %>"><%= sifreNaloga.sifra_naloga %></option>
+        <% }); %>
+    </select>
+    <button type="submit">odaberi</button>
+</form
+
+<table border="1">
+    <tr><strong>Sifra Naloga:</strong><%=podaci.sifra_naloga%> </tr><br>
+    <tr><strong>Organizaciona Jedinica:</strong><%=podaci.org_jedinica%></tr><br>
+    <tr><strong>Godina: </strong><%=podaci.godina%></tr><br>
+    <tr><strong>Broj:</strong> <%=podaci.broj%></tr><br>
+    <tr><strong>Datum:</strong> <%=podaci.datum%></tr><br>
+    <tr><strong>Garažni broj:</strong> <%=podaci.vozilo_garazni_br%></tr><br>
+
+
+</table>
+
+<table border="1">
+    <caption>Vozno Osoblje</caption>
+    <tr>
+        <th>Vozno Osoblje ID</th>
+        <th>Putni Nalog ID</th>
+    </tr>
+    <% for(let i = 0; i < voznoOsoblje.length; i++) { %>
+        <tr>
+            <td><%= voznoOsoblje[i].vozno_osoblje_id %></td>
+            <td><%= voznoOsoblje[i].putni_nalog_id %></td>
+        </tr>
+    <% } %>
+</table>
+
+<table border="1">
+    <caption>Relacije</caption>
+    <tr>
+        <th>Linija ID</th>
+        <th>Putni Nalog ID</th>
+        <th>Smjer</th>
+        <th>Vrijeme</th>
+    </tr>
+    <% for(let i = 0; i < relacijePN.length; i++) { %>
+        <tr>
+            <td><%= relacijePN[i].linija_id %></td>
+            <td><%= relacijePN[i].putni_nalog_id %></td>
+            <td><%= relacijePN[i].smjer %></td>
+            <td><%= relacijePN[i].vrijeme %></td>
+        </tr>
+    <% } %>
+</table>
+</body>
+</html>
+
